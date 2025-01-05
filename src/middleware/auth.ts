@@ -25,7 +25,7 @@ export const jwtParse = async (req: Request, res: Response, next: NextFunction) 
         return res.sendStatus(401);
     }
 
-    const token = authorization.split(" ")[1]; // Corrected split method
+    const token = authorization.split(" ")[1];
 
     try {
         const decoded = jwt.decode(token) as jwt.JwtPayload;
@@ -41,6 +41,7 @@ export const jwtParse = async (req: Request, res: Response, next: NextFunction) 
         req.userId = user._id.toString();
         next();
     } catch (error) {
+        console.error("Error parsing JWT:", error);
         return res.sendStatus(401);
     }
 };
