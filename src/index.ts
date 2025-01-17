@@ -6,6 +6,7 @@ import mongoose from "mongoose";
 import myUserRoute from "./routes/MyUserRoute";
 import myRestaurantRoute from"./routes/MyRestaurantRoute";
 import {v2 as cloudinary}  from "cloudinary";
+import restuarantRoute from "./routes/RestaurantRoute";
 
 
 const app = express();
@@ -22,7 +23,8 @@ mongoose.connect(process.env.MONGODB_CONNECTION_STRING as string)
     .then(() => console.log("Connected to our database"));
 
 app.use("/api/my/user", myUserRoute);
-app.use("/api/my/restaurant",myRestaurantRoute)
+app.use("/api/my/restaurant",myRestaurantRoute);
+app.use("/api/restaurant/", restuarantRoute);
 
 cloudinary.config({
     cloud_name: process.env.CLOUDINARY_CLOUD_NAME,
